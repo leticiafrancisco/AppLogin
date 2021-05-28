@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+//IMPORT DA TELA DE LOGIN
+import LoginScreen from './src/pages/LoginScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+//IMPORT DA TELA DE HOME
+import TelaHomeApp from './src/pages/TelaHomeApp';
+
+//PILHA DE NAVEGAÇÃO
+const AppNavigator = createStackNavigator({
+  //PRIMEIRO ELEMENTO DA PILHA DE NAVEGAÇÃO
+  'Login':{
+
+    screen: LoginScreen,
+    navigationOptions:{
+      title: 'TELA DE LOGIN'
+    }
   },
-});
+  //SEGUNDA ELEMENTO DA PILHA DE NAVEGAÇÃO 
+  'Home':{
+
+    screen: TelaHomeApp,
+    navigationOptions:{
+      title: 'HOME- USUÁRIO LOGADO'
+    }
+  }
+
+},{
+  defaultNavigationOptions: {
+
+    // ESTILIZAÇÃO GLOBAL DOS CABEÇALHOS DE NAVEGAÇÃO
+    headerStyle:{
+      backgroundColor:'#9498EF',
+      borderBottomColor:'#c5c5c5',
+    },
+    headerTitleStyle:{
+      color: '#fff',
+      fontSize: 30
+    }
+  } 
+})
+
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default AppContainer;
